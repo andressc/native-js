@@ -3,10 +3,14 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {splitIntoWords} from "./01/01"
+import {addSkill, sum} from "./03/03"
+import {student} from "./02/02"
 
-const sentence = "Hello my friends!!"
-console.log(splitIntoWords(sentence))
+const summa = sum(3, 9)
+console.log(summa)
+
+addSkill(student, "PHP");
+console.log(student)
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
