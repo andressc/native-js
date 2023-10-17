@@ -1,6 +1,5 @@
-import {addMoneyToBudget, repearHouse, toFireStaff, toHireStaff} from "./03"
+import {demolishHousesOnTheStreet, getBuildingsWithStaffCountGreaterThen} from "./04"
 import {CityType} from "../types/types"
-
 
 let city: CityType
 
@@ -36,7 +35,7 @@ beforeEach(() => {
                 repaired: false,
                 address: {
                     street: {
-                        title: "Hogwarts street"
+                        title: "Happy street"
                     },
                     number: 200
                 },
@@ -67,34 +66,16 @@ beforeEach(() => {
     }
 })
 
-test("Budget should be changed for HOSPITAL", () => {
-    addMoneyToBudget(city.governmentBuildings, "HOSPITAL", 100000)
+test("Houses shold be destroyed", () => {
+    demolishHousesOnTheStreet(city, "Happy street")
 
-    expect(city.governmentBuildings[0].budget).toBe(300000)
-    expect(city.governmentBuildings[1].budget).toBe(500000)
+    expect(city.houses.length).toBe(1)
+    expect(city.houses[0].id).toBe(1)
 })
 
-test("Budget should be changed for FIRE-STATION", () => {
-    addMoneyToBudget(city.governmentBuildings, "FIRE-STATION", -100000)
+test("buildings with correct staff count", () => {
+    let buildings = getBuildingsWithStaffCountGreaterThen(city.governmentBuildings, 500)
 
-    expect(city.governmentBuildings[0].budget).toBe(200000)
-    expect(city.governmentBuildings[1].budget).toBe(400000)
-})
-
-test("House should be repeared", () => {
-    repearHouse(city.houses[1])
-
-    expect(city.houses[1].repaired).toBeTruthy()
-})
-
-test("staff should be increased", () => {
-    toFireStaff(city.governmentBuildings[0], 20)
-
-    expect(city.governmentBuildings[0].staffCount).toBe(180)
-})
-
-test("staff should be repeared", () => {
-    toHireStaff(city.governmentBuildings[0], 20)
-
-    expect(city.governmentBuildings[0].staffCount).toBe(220)
+    expect(buildings.length).toBe(1)
+    expect(buildings[0].type).toBe("FIRE-STATION")
 })

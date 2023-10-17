@@ -1,41 +1,13 @@
-type StreetType2 = {
-    title: string
-}
+import {CityType} from "../types/types"
 
-type AddressType2 = {
-    street: StreetType2
-}
-
-type ExtendedAddressType2 = AddressType2 & { number: number }
-
-type HouseType2 = {
-    buildedAt: number
-    repaired: boolean
-    address: ExtendedAddressType2
-}
-
-type GovernmentBuildingType2 = {
-    type: "HOSPITAL" | "FIRE-STATION"
-    budget: number
-    staffCount: number
-    address: AddressType2
-}
-
-type CityType2 = {
-    title: string,
-    houses: HouseType2[],
-    governmentBuildings: GovernmentBuildingType2[],
-    citizensNumbers: number
-}
-
-
-let city2: CityType2
+let city2: CityType
 
 beforeEach(() => {
     city2 = {
         title: "New York",
         houses: [
             {
+                id: 1,
                 buildedAt: 2012,
                 repaired: false,
                 address: {
@@ -46,6 +18,7 @@ beforeEach(() => {
                 },
             },
             {
+                id: 2,
                 buildedAt: 2008,
                 repaired: false,
                 address: {
@@ -56,6 +29,7 @@ beforeEach(() => {
                 },
             },
             {
+                id: 3,
                 buildedAt: 2020,
                 repaired: false,
                 address: {

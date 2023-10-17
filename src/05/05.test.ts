@@ -1,6 +1,5 @@
-import {addMoneyToBudget, repearHouse, toFireStaff, toHireStaff} from "./03"
 import {CityType} from "../types/types"
-
+import {getStreetsTitlesOfGovernmentsBuildings, getStreetsTitlesOfHouses} from "./05"
 
 let city: CityType
 
@@ -36,7 +35,7 @@ beforeEach(() => {
                 repaired: false,
                 address: {
                     street: {
-                        title: "Hogwarts street"
+                        title: "Happy street"
                     },
                     number: 200
                 },
@@ -58,7 +57,7 @@ beforeEach(() => {
                 staffCount: 1000,
                 address: {
                     street: {
-                        title: "Souths park str"
+                        title: "Souths str"
                     },
                 },
             }
@@ -67,34 +66,19 @@ beforeEach(() => {
     }
 })
 
-test("Budget should be changed for HOSPITAL", () => {
-    addMoneyToBudget(city.governmentBuildings, "HOSPITAL", 100000)
+test("list of streets titles of goverments buildings", () => {
+    let streetsNames = getStreetsTitlesOfGovernmentsBuildings(city.governmentBuildings)
 
-    expect(city.governmentBuildings[0].budget).toBe(300000)
-    expect(city.governmentBuildings[1].budget).toBe(500000)
+    expect(streetsNames.length).toBe(2)
+    expect(streetsNames[0]).toBe("Central Str")
+    expect(streetsNames[1]).toBe("Souths str")
 })
 
-test("Budget should be changed for FIRE-STATION", () => {
-    addMoneyToBudget(city.governmentBuildings, "FIRE-STATION", -100000)
+test("list of streets titles", () => {
+    let streetsNames = getStreetsTitlesOfHouses(city.houses)
 
-    expect(city.governmentBuildings[0].budget).toBe(200000)
-    expect(city.governmentBuildings[1].budget).toBe(400000)
-})
-
-test("House should be repeared", () => {
-    repearHouse(city.houses[1])
-
-    expect(city.houses[1].repaired).toBeTruthy()
-})
-
-test("staff should be increased", () => {
-    toFireStaff(city.governmentBuildings[0], 20)
-
-    expect(city.governmentBuildings[0].staffCount).toBe(180)
-})
-
-test("staff should be repeared", () => {
-    toHireStaff(city.governmentBuildings[0], 20)
-
-    expect(city.governmentBuildings[0].staffCount).toBe(220)
+    expect(streetsNames.length).toBe(3)
+    expect(streetsNames[0]).toBe("White street")
+    expect(streetsNames[1]).toBe("Happy street")
+    expect(streetsNames[2]).toBe("Happy street")
 })
